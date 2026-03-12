@@ -6,11 +6,13 @@ import { useState } from 'react'
 import axios from 'axios'
 import { useEffect } from 'react'
 function App() {
-  const [jokes, setjokes] = useState([])
+  const [jokess, setjokess] = useState([])
 useEffect(()=>{
-  axios.get('http://localhost:3000/jokes')
+  axios.get('/api/jokes')
   .then((response)=>{
-    setjokes(response.data)
+    setjokess(response.data)
+    // console.log(response.data.length)
+    // console.log(response.data)
   })
   .catch((error)=>{
     console.log(error)
@@ -19,14 +21,22 @@ useEffect(()=>{
   return (
     <>
       <h1>Chai aur Jokes</h1>
-      <p>Jokes:{jokes.length}</p>
+      <p>Jokes:{jokess.length}</p>
       {
-        jokes.map((joke)=>{
+        jokess.map((joke)=>(
 <div key={joke.id}>
   <h1>{joke.setup}</h1>
   <h2>{joke.punchline}</h2>
 </div>
-        })
+        ))
+// jokes.map((joke) => {
+//   return (
+//     <div key={joke.id}>
+//       <h1>{joke.setup}</h1>
+//       <h2>{joke.punchline}</h2>
+//     </div>
+//   );
+// })
       }
     </>
   )
